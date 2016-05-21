@@ -30,7 +30,7 @@ public class Procedimento implements Serializable{
 	@Column(name="PRECO")
 	private double preco;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="CPFPAC")
 	private Paciente paciente;
 

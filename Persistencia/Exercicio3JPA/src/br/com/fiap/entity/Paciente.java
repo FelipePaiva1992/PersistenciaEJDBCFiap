@@ -36,13 +36,13 @@ public class Paciente implements Serializable{
 	@Column(name="TELEFONE")
 	private String telefone;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paciente")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "paciente")
 	private Set<Procedimento> procedimentos = new HashSet<>();
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paciente")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "paciente")
 	private Set<MatMed> meds = new HashSet<>();
 	
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="pacientes")
+	@ManyToMany(fetch=FetchType.EAGER, mappedBy="pacientes")
 	private Set<Agenda> agendas = new HashSet<>();
 
 	public String getCpf() {

@@ -40,7 +40,7 @@ public class Agenda implements Serializable {
 	@Column(name = "DESCRICAO")
 	private String descricao;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "AGENDA_PACIENTE", catalog = "medico", joinColumns = {
 			@JoinColumn(name = "AGENDA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "PACIENTE_CPF", nullable = false, updatable = false) })

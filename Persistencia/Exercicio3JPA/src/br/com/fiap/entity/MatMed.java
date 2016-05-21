@@ -33,7 +33,7 @@ public class MatMed  implements Serializable{
 	@Column(name="FABRICANTE")
 	private String fabricante;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="CPFPAC")
 	private Paciente paciente;
 
