@@ -3,17 +3,16 @@ package br.com.fiap.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.fiap.dao.GenericDao;
 import br.com.fiap.entity.Usuario;
 
-@WebServlet(name = "Servlet Login", urlPatterns = { "/valida" }, initParams = {
-		@WebInitParam(name = "user", value = "admin"), @WebInitParam(name = "pwd", value = "admin") })
+@WebServlet(name = "Servlet Login", urlPatterns = { "/valida" })
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +30,8 @@ public class ServletLogin extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 
+		HttpSession session = request.getSession();
+
 		try {
 			GenericDao<Usuario> dao = new GenericDao<>(Usuario.class);
 			String nome = request.getParameter("nome");
@@ -39,16 +40,18 @@ public class ServletLogin extends HttpServlet {
 			Usuario usuario = dao.buscar(nome, senha);
 
 			if (usuario != null) {
+
+				session.setAttribute("usuario_logado", usuario);
 				response.sendRedirect("admin/menu.jsp");
 			} else {
+				session.setAttribute("usuario_logado", null);
 				request.setAttribute("msgValidacao", "Usuario ou Senha invalidos!");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
+			session.setAttribute("usuario_logado", null);
 			request.setAttribute("msgValidacao", "Usuario ou Senha invalidos!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-
 	}
-
 }

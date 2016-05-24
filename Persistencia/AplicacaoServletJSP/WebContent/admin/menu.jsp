@@ -5,8 +5,9 @@
 <title>Menu</title>
 </head>
 <body>
-	<h1>Menu de opções</h1>
-	<a href="../login.jsp">Sair</a>
+	<%@ include file="welcome.jsp" %>
+	<h1>Menu</h1> 
+	<a href="logof">Sair</a>
 	<br>
 	<a href="cadUsuarios.jsp">Cadastro de usuários</a>
 	<br>

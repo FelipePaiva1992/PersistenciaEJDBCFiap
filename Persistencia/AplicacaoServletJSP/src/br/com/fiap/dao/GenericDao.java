@@ -40,21 +40,24 @@ public class GenericDao<T> implements Dao<T> {
 
 		return entidade;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public T buscar(String nome, String senha) throws Exception {
-		em = JpaUtil.getEntityManager();
-		em.getTransaction().begin();
-		Query query = em.createQuery("From " + classe.getSimpleName() + " WHERE usuario = :u and senha = :s");
-		query.setParameter("u", nome);
-		query.setParameter("s", senha);
-		T entidade = (T) query.getSingleResult();
-		em.getTransaction().commit();
-		em.close();
-
-		return entidade;
+		try {
+			em = JpaUtil.getEntityManager();
+			em.getTransaction().begin();
+			Query query = em.createQuery("From " + classe.getSimpleName() + " WHERE usuario = :u and senha = :s");
+			query.setParameter("u", nome);
+			query.setParameter("s", senha);
+			T entidade = (T) query.getSingleResult();
+			em.getTransaction().commit();
+			em.close();
+			return entidade;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public T buscarNome(String nome) throws Exception {
 		em = JpaUtil.getEntityManager();
 		em.getTransaction().begin();
