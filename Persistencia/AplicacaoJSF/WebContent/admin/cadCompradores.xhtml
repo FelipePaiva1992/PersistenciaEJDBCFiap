@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"	
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:link value="Voltar" outcome="menu"></h:link>
+		<br></br>
+		<br></br>
+		<h:outputText value="Código" />
+		<br />
+		<h:inputText value="#{compradoresBean.comprador.codigo}" />
+		<br />
+		<h:outputText value="Livro" />
+		<br />
+		<h:selectOneMenu value="#{compradoresBean.livro.codigo}">
+			<f:selectItems value="#{compradoresBean.listaLivros}"></f:selectItems>
+		</h:selectOneMenu>
+		<br />
+		<h:outputText value="Nome" />
+		<br />
+		<h:inputText value="#{compradoresBean.comprador.nome}" />
+		<br />
+		<h:outputText value="Email" />
+		<br />
+		<h:inputText value="#{compradoresBean.comprador.email}" />
+		<br />
+		<br />
+		<h:commandButton value="Incluir" action="#{compradoresBean.incluirComprador}" />
+	</h:form>
+</h:body>
+</html>

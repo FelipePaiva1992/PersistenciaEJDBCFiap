@@ -1,10 +1,12 @@
 package br.com.fiap.bean;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
 
 import br.com.fiap.dao.GenericDao;

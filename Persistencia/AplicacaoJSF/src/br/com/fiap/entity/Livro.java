@@ -1,11 +1,18 @@
 package br.com.fiap.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -48,6 +55,10 @@ public class Livro {
 	@Lob
 	@Column(name="IMAGEM")
 	private byte[] imagem;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "livro")
+	Set<Comprador> compradores = new HashSet<>();
+	
 	
 	
 	/*
@@ -98,5 +109,18 @@ public class Livro {
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
 	}
+
+
+	public Set<Comprador> getCompradores() {
+		return compradores;
+	}
+
+
+	public void setCompradores(Set<Comprador> compradores) {
+		this.compradores = compradores;
+	}
+
+
+	
 }
 

@@ -39,6 +39,11 @@ public class UsuariosBean {
 			return "erroAcesso";
 		}
 	}
+	
+	public String logout(){
+		sessionMap.remove("usuario_logado");
+		return "login";
+	}
 
 	public String getUsuario() {
 		return usuario;

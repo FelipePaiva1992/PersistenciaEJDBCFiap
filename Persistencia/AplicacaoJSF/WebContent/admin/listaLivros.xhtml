@@ -6,6 +6,9 @@
 </h:head>
 <h:body>
 	<h:form>
+		<h:link value="Voltar" outcome="menu"></h:link>
+		<br></br>
+		<br></br>
 		<h:dataTable value="#{livrosBean.listaLivros}" var="livro" styleClass="tabela" headerClass="cabecalho" columnClasses="col1,col2,col3,col4">
 			<h:column>
 				<f:facet name="header">
