@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h2>Lista de Livros - selectOneMenu</h2>
+	<p:selectOneMenu id="livros" value="#{livrosBean.livro.codigo}">
+		<f:selectItem itemValue="" itemLabel="Selecione uma empresa"/> 
+		<f:selectItems value="#{livrosBean.listaLivros}" var="livro" itemLabel="#{livro.titulo}" itemValue="#{livro.codigo}" />
+		<p:ajax update="tabLivros" listener="#{livrosBean.buscarCompradores}" />
+	</p:selectOneMenu>
+	<p:panel header="Lista de Compradores">
+		<p:dataTable id="tabLivros" value="#{livrosBean.listaCompradores}" var="c">
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="ID" />
+				</f:facet>
+				<p:outputLabel value="#{c.codigo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="NOME" />
+				</f:facet>
+				<p:outputLabel value="#{c.nome}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="EMAIL" />
+				</f:facet>
+				<p:outputLabel value="#{c.email}" />
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+</h:body>
+</html>

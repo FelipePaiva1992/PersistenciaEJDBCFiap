@@ -5,21 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
 
 import br.com.fiap.dao.GenericDao;
+import br.com.fiap.entity.Comprador;
 import br.com.fiap.entity.Livro;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LivrosBean {
 	private Livro livro;
 	private Part figura;
+	private List<SelectItem> listaLivros;
+	
+	
 
 	public LivrosBean() {
 		livro = new Livro();
+		
+		GenericDao<Livro> dao = new GenericDao<Livro>(Livro.class);
+		listaLivros = new ArrayList<>();
+		for (Livro l : dao.listar()) {
+			listaLivros.add(new SelectItem(l.getCodigo(), l.getTitulo()));
+		}
+		
+		buscarCompradores();
 	}
 
 	public Livro getLivro() {
@@ -59,4 +71,30 @@ public class LivrosBean {
 		GenericDao<Livro> dao = new GenericDao<Livro>(Livro.class);
 		return dao.listar();
 	}
+
+	private List<Comprador> listaCompradores = new ArrayList<Comprador>();
+
+	public List<Comprador> getListaCompradores() {
+		return listaCompradores;
+	}
+
+	public void setListaCompradores(List<Comprador> listaCompradores) {
+		this.listaCompradores = listaCompradores;
+	}
+
+	public void buscarCompradores() {
+		try {
+			listaCompradores = new GenericDao<Comprador>(Comprador.class).listarCompradores(this.livro.getCodigo());
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+
+	public void setListaLivros(List<SelectItem> listaLivros) {
+		this.listaLivros = listaLivros;
+	}
+
+	
+	
+	
 }

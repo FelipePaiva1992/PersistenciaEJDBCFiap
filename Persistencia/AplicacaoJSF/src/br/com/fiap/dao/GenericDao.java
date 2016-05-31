@@ -1,9 +1,13 @@
 package br.com.fiap.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import br.com.fiap.entity.Comprador;
+import br.com.fiap.entity.Livro;
 
 public class GenericDao<T> implements Dao<T> {
 
@@ -69,6 +73,21 @@ public class GenericDao<T> implements Dao<T> {
 		em.close();
 
 		return entidade;
+	}
+
+	public List<Comprador> listarCompradores(Integer codigo) {
+		em = JpaUtil.getEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createQuery("From Livro WHERE codigo = :c");
+		query.setParameter("c", codigo);
+		Livro livro = (Livro) query.getSingleResult();
+		em.getTransaction().commit();
+		em.close();
+		
+		List<Comprador> compradores = new ArrayList<>();
+		compradores.addAll(livro.getCompradores());
+
+		return compradores;
 	}
 
 }
